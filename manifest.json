@@ -1,0 +1,11 @@
+{
+    "id": "yandex-tracker-linker",
+    "name": "Yandex Tracker Linker",
+    "version": "1.0.0",
+    "minAppVersion": "0.15.0",
+    "description": "Автоматически создает ссылки на задачи Yandex Tracker из текста.",
+    "author": "",
+    "authorUrl": "https://example.com",
+    "fundingUrl": "https://obsidian.md/pricing",
+    "isDesktopOnly": false
+}

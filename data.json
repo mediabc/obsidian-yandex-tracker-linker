@@ -1,0 +1,9 @@
+{
+  "trackerBaseURL": "https://tracker.yandex.ru/",
+  "apiToken": "y0_AgAEA7qkVGu7AAz1xAAAAAEcdr8AAABE3KRI1tdBWIUNeB4lhpIdft_ymA",
+  "orgId": "6953612",
+  "defaultDescription": "{% cut \"Создано из Obsidian\" %}\n\nЭта задача создана из заметок в Obsidian.\n\n{% endcut %}",
+  "defaultAssignees": [
+    "ova"
+  ]
+}
