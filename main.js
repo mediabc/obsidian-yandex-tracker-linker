@@ -282,19 +282,14 @@ var YandexTrackerLinkerPlugin = class extends import_obsidian.Plugin {
           return;
         }
       }
-      const existingLinks = /* @__PURE__ */ new Set();
-      let match;
-      while ((match = this.linkRegex.exec(content)) !== null) {
-        existingLinks.add(match[1]);
-      }
       updatedContent = updatedContent.replace(this.taskRegex, (fullMatch, taskId, offset) => {
-        if (existingLinks.has(taskId))
-          return fullMatch;
         if (content.slice(Math.max(0, offset - 3), offset).endsWith("]("))
           return fullMatch;
-        const beforeContext = content.slice(Math.max(0, offset - 200), offset);
+        const lines2 = content.split("\n");
+        const currentLineIndex = content.slice(0, offset).split("\n").length - 1;
+        const currentLine2 = lines2[currentLineIndex];
         const urlPattern = new RegExp(`\\[${taskId}\\]\\(${this.settings.trackerBaseURL}${taskId}\\)`);
-        if (urlPattern.test(beforeContext))
+        if (urlPattern.test(currentLine2))
           return fullMatch;
         return `[${taskId}](${this.settings.trackerBaseURL}${taskId})`;
       });

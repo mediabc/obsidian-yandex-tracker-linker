@@ -352,19 +352,18 @@ export default class YandexTrackerLinkerPlugin extends Plugin {
             }
 
             // Process existing task links
-            const existingLinks = new Set();
-            let match;
-            while ((match = this.linkRegex.exec(content)) !== null) {
-                existingLinks.add(match[1]);
-            }
-
             updatedContent = updatedContent.replace(this.taskRegex, (fullMatch, taskId, offset) => {
-                if (existingLinks.has(taskId)) return fullMatch;
+                // Skip if we're already in a link
                 if (content.slice(Math.max(0, offset - 3), offset).endsWith('](')) return fullMatch;
                 
-                const beforeContext = content.slice(Math.max(0, offset - 200), offset);
+                // Get the current line
+                const lines = content.split('\n');
+                const currentLineIndex = content.slice(0, offset).split('\n').length - 1;
+                const currentLine = lines[currentLineIndex];
+                
+                // Check if there's already a link to this task in the current line
                 const urlPattern = new RegExp(`\\[${taskId}\\]\\(${this.settings.trackerBaseURL}${taskId}\\)`);
-                if (urlPattern.test(beforeContext)) return fullMatch;
+                if (urlPattern.test(currentLine)) return fullMatch;
 
                 return `[${taskId}](${this.settings.trackerBaseURL}${taskId})`;
             });
